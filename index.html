@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pydah Kranthi - Upload Your Photo</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      border: 0.5px solid #000000;
+      width: 100%;
+      max-width: 86%;
+      text-align: center;
+      position: relative;
+    }
+    .header {
+      background: linear-gradient(45deg, #d62101fe, #febf13);
+      color: white;
+      padding: 15px;
+      border-radius: 10px 10px 0 0;
+      font-size: 1.8em;
+      font-weight: bold;
+    }
+    .procedure {
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 1.1em;
+      margin: 20px 0;
+      color: #555;
+      text-align: left;
+    }
+    input[type="file"] {
+      display: none;
+    }
+    .file-upload-btn {
+      display: inline-block;
+      width: calc(100% - 20px);
+      margin: 15px auto;
+      padding: 12px;
+      color: white;
+      background-color: black;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      text-align: center;
+    }
+    .file-upload-btn:hover {
+      background-color: #444;
+    }
+    input[type="text"] {
+      display: block;
+      width: calc(100% - 20px);
+      margin: 15px auto;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      font-size: 1em;
+    }
+    button {
+      padding: 12px 20px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+    button:hover {
+      background-color: #444;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .example-btn {
+      left: 0;
+      margin: 1px 0;
+      height: 0.5cm;
+      width: 2cm;
+      background-color: #000000;
+      color: white;
+      font-size: 10px;
+      text-align: center;
+      line-height: 0.0cm;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .example-btn:hover {
+      background-color: #31353a;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    .popup-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+    }
+    .popup-content img {
+      width: 100%;
+      max-width: 300px;
+      margin: 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+    .popup-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ffffff;
+      color: rgb(0, 0, 0);
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    .popup-close:hover {
+      background: #ffffff;
+    }
+    .footer {
+      margin-top: 15px;
+      font-size: 0.9em;
+    }
+    .footer a {
+      color: #d62101;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Pydah Kranthi Clicks!</div>
+    <div class="procedure">
+      <h3>Procedure:</h3>
+      <p>Upload your best shots from the Pydah Kranthi celebration! The photos or videos must be related to the event. Irrelevant shots will not be considered. The best shots will be selected and posted on our Instagram page, where we will tag the provided Instagram ID to give you credit.</p>
+      <button class="example-btn" id="exampleBtn">Examples</button>
+    </div>
+
+    <!-- Floating Popup -->
+    <div class="popup-overlay" id="popup">
+      <div class="popup-content">
+        <button class="popup-close" id="closePopup">×</button>
+        <h4>Examples for shots you can upload</h4>
+        <img src="pydahkranthi2.webp" alt="Example 1">
+        <img src="pydahkranthipic1.webp" alt="Example 2">
+      </div>
+    </div>
+
+    <form id="uploadForm">
+      <label class="file-upload-btn" for="photo">Click To Select File</label>
+      <input type="file" id="photo" required>
+      <div class="file-name" id="fileName"></div>
+      <input type="text" id="instagramId" placeholder="Enter your Instagram ID" required>
+      <button type="submit">Upload</button>
+    </form>
+    <div class="status" id="statusMessage"></div>
+    <div class="error" id="errorMessage"></div>
+    <div class="footer">
+      Follow us on <a href="https://www.instagram.com/pydah_vibes?igsh=MTd6c3NtN3QxcnV4YQ==" target="_blank">PydahVibes</a>.
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
+  <script>
+    // Dropbox API key (replace with your actual API key)
+    const DROPBOX_API_KEY = 'sl.CEBthPspAStSSFXma5zXeM1YWtMHonkmpMowoVGUOy4Pz5XXGbe9AyUd8Ds_imohGBb5RNjBYwVVkq0y2FpZOQCyQia73qFjvmkEq7C8nUm3LAzR-m044pPZc8pu_rYVxooUVkuSP-3O7g0MKS4gFWs'; // You need to get this from the Dropbox Developer Console
+
+    // Initialize the Dropbox client
+    const dbx = new Dropbox.Dropbox({ accessToken: DROPBOX_API_KEY });
+
+    // Handle Popup
+    const popup = document.getElementById('popup');
+    const exampleBtn = document.getElementById('exampleBtn');
+    const closePopup = document.getElementById('closePopup');
+
+    exampleBtn.addEventListener('click', () => {
+      popup.style.display = 'flex';
+    });
+
+    closePopup.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+
+    // Close popup on clicking outside the content
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        popup.style.display = 'none';
+      }
+    });
+
+    // File upload logic
+    document.getElementById('photo').addEventListener('change', function () {
+      const fileName = this.files[0]?.name || '';
+      document.getElementById('fileName').textContent = fileName ? `Selected file: ${fileName}` : '';
+    });
+
+    document.getElementById('uploadForm').addEventListener('submit', function (e) {
+      e.preventDefault();  // Prevent the default form submission
+
+      const fileInput = document.getElementById('photo');
+      const instagramId = document.getElementById('instagramId').value;
+      const file = fileInput.files[0];
+      
+      if (file && instagramId) {
+        // Create custom file name with Instagram ID and timestamp
+        const fileName = `[${instagramId}]_${Date.now()}_${file.name}`;
+
+        // Show a status message indicating the file is being uploaded
+        document.getElementById('statusMessage').textContent = 'Uploading...';
+
+        // Upload file to Dropbox with the custom file name
+        dbx.filesUpload({ path: '/' + fileName, contents: file })
+          .then(function (response) {
+            // File uploaded successfully
+            document.getElementById('statusMessage').textContent = 'Upload successful!';
+          })
+          .catch(function (error) {
+            // Handle errors during the upload
+            document.getElementById('errorMessage').textContent = 'Error uploading file: ' + error;
+          });
+      } else {
+        document.getElementById('errorMessage').textContent = 'Please select a file and enter your Instagram ID.';
+      }
+    });
+  </script>
+</body>
+</html>
