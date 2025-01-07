@@ -163,97 +163,99 @@
 </head>
 <body>
   <div class="container">
-    <div class="header">Pydah Kranthi Clicks!</div>
+    <div class="header">Pydah Kranthi - Upload Your Photo</div>
     <div class="procedure">
       <h3>Procedure:</h3>
       <p>Upload your best shots from the Pydah Kranthi celebration! The photos or videos must be related to the event. Irrelevant shots will not be considered. The best shots will be selected and posted on our Instagram page, where we will tag the provided Instagram ID to give you credit.</p>
       <button class="example-btn" id="exampleBtn">Examples</button>
     </div>
 
-    <!-- Floating Popup -->
+    <!-- Popup for examples -->
     <div class="popup-overlay" id="popup">
       <div class="popup-content">
         <button class="popup-close" id="closePopup">×</button>
-        <h4>Examples for shots you can upload</h4>
+        <h4>Examples</h4>
         <img src="pydahkranthi2.webp" alt="Example 1">
         <img src="pydahkranthipic1.webp" alt="Example 2">
       </div>
     </div>
 
     <form id="uploadForm">
-      <label class="file-upload-btn" for="photo">Click To Select File</label>
-      <input type="file" id="photo" required>
-      <div class="file-name" id="fileName"></div>
-      <input type="text" id="instagramId" placeholder="Enter your Instagram ID" required>
+      <label for="file" class="file-upload-btn">Choose File</label>
+      <input type="file" id="file" required>
+      <p class="file-name" id="fileName">No file selected</p>
+      <input type="text" placeholder="Instagram ID" id="instagramId" required>
       <button type="submit">Upload</button>
     </form>
-    <div class="status" id="statusMessage"></div>
-    <div class="error" id="errorMessage"></div>
+
+    <div id="statusMessage"></div>
+
     <div class="footer">
-      Follow us on <a href="https://www.instagram.com/pydah_vibes?igsh=MTd6c3NtN3QxcnV4YQ==" target="_blank">PydahVibes</a>.
+      Follow us on <a href="https://www.instagram.com/pydah_vibes" target="_blank">PydahVibes</a>.
     </div>
   </div>
 
-  <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
   <script>
-    // Dropbox API key (replace with your actual API key)
-    const DROPBOX_API_KEY = 'sl.u.AFdKubNNphNiECXS5BOWTc4Gm50Xy3-_Dd0xVtoC7p_IaqGMLUUOjvDoT3YOrqsUDrIayg0N1AeBBLxVb4txqourSD_NMXzjj29ghvwQGQI8gv7l1ida7LQEewx2VKc8mLwWN5BB31aF5u3JwLt6OquPHA6h_mrVsYeHjBgornmDzWl__Ocdf_HD17ISASYPHNZiO5Y5_IAfEX0oJxA0A7IegkdOOlGMCMPo2JPaRJf3GOC0agULHJNrpy2IVY5P3bqLlZsjKnPBgwv67qw_uW-08e9DnhpKAF2fz16a3fJFNWWUrvW8VKIXqK9osOSgliw7mciny43TDKFZJzoV62pCX_eApjc_HbpFql8YSF9ADO4OHpqYUKJYwXwPwlBgLRWpTaE31ofDBv8Cyg3i91-udnaO3VQ2XVEIW6BdlpE-WLX15ULe07sqG3cqMlfZUjWsCGFALEZVEGpzC4lsZ_8RbSXHN5srK8gpsv1l2vxJN3PzQF4-_2i0VbpopBNC-2aAlm-7C3w8uIl1nnt3Bu8GXge0gOqFMAuBkHPrRpVVm884pQ_eu3oIxNRc5zbxk0ds1cLJa5UHrk1ZyZSV_KgTNBJiptIh7Pk8nCL2P1I0ZtGN7ApWVBvbW0ZRtaJSg2Gy2AG9gKmlViy8R9J3labXgAmVjreRSuh-H1cGs9Eaqd2xj5i3qJTdi8ApwHLFE2Z2Q6RF0vaI8OOZkwQjZNSlUolDqGUfZ_-G3-Mv6AzxAridJULhZ6kUm5PO3Wp1xjxZc8PLc6XRfw6m_wrQ-ERQJVhCoZSmXBEfjTFUdHEPqlVPpiF7g0bjPXeNdI4xOSPDzUkSj8F7MlikH_1-g9VdQ4hYziRQ7NiRMqyMaNS2LWuqVNeQBZsZONsSxfHtn5abEA7TodE2D3nCcoNB111f0sf2JvTM1zZEf1oe876FTolFjk0izo2r5jkb7p4AOtQNy9mbVl1GJa4W5LVsfnUb7Vj1Cu9UPTIZy5d67e2c24BndkItVA4G2ldsIndq5Jk_ojqVwOA7RuCIV3s52nNWs-Ddt-6VblaJMe4wy_BFZayB2Ks0HxFohFzLH-wRdWBAL8QfCK21qra7ogY7njGj-ln33tHOE28muI8ISGdDz_jHVfw3-z351yrLeg_o99vyfjmxnmdqglViq6iE3b9LEocMKx00qrb4AKFJyRTO5vJYrj_E1u539W9ny2rV0P4W0UZhAESl1QwGXFwvp3B7HiGGrbkKMpbP4nByWZLCzRX5eLBe-fld7twoamPSVn505dVX3BtLL3Dl_bNTZ0zxPlBhqy0SKNMvA4K-WsXkGMBNEKbYM6anNNOzdZ1prmgA4TwMtr-2wQO6DCjHrN0DdjeXrgezD5Rj61TOJEY_oisQk1JEFRXQDAp8V9cFvmUuJiSvSF2wIVd4lxL5jsS7oNHEvw6lISBJQNYfI5dPSCLkn-Aa7aGVSPH6uklZS0U'; // You need to get this from the Dropbox Developer Console
-
-    // Initialize the Dropbox client
-    const dbx = new Dropbox.Dropbox({ accessToken: DROPBOX_API_KEY });
-
     // Handle Popup
     const popup = document.getElementById('popup');
     const exampleBtn = document.getElementById('exampleBtn');
     const closePopup = document.getElementById('closePopup');
 
-    exampleBtn.addEventListener('click', () => {
-      popup.style.display = 'flex';
-    });
-
-    closePopup.addEventListener('click', () => {
-      popup.style.display = 'none';
-    });
-
-    // Close popup on clicking outside the content
+    exampleBtn.addEventListener('click', () => popup.style.display = 'flex');
+    closePopup.addEventListener('click', () => popup.style.display = 'none');
     popup.addEventListener('click', (e) => {
-      if (e.target === popup) {
-        popup.style.display = 'none';
+      if (e.target === popup) popup.style.display = 'none';
+    });
+
+    // Display file name
+    document.getElementById('file').addEventListener('change', function () {
+      const fileName = this.files[0]?.name || 'No file selected';
+      document.getElementById('fileName').textContent = fileName;
+    });
+
+    // Handle form submission and file upload
+    const uploadForm = document.getElementById('uploadForm');
+    const statusMessage = document.getElementById('statusMessage');
+
+    uploadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const photo = document.getElementById('file').files[0];
+      const instagramId = document.getElementById('instagramId').value.trim();
+
+      if (!photo || !instagramId) {
+        statusMessage.textContent = 'Please provide all required details.';
+        statusMessage.style.color = 'red';
+        return;
       }
-    });
 
-    // File upload logic
-    document.getElementById('photo').addEventListener('change', function () {
-      const fileName = this.files[0]?.name || '';
-      document.getElementById('fileName').textContent = fileName ? `Selected file: ${fileName}` : '';
-    });
+      const fileName = `[${instagramId}]_${Date.now()}_${photo.name}`;
+      const formData = new FormData();
+      formData.append('file', photo);
+      formData.append('upload_preset', 'public_uploads'); // Replace with your Cloudinary upload preset
+      formData.append('public_id', fileName); // Custom file name
 
-    document.getElementById('uploadForm').addEventListener('submit', function (e) {
-      e.preventDefault();  // Prevent the default form submission
+      statusMessage.textContent = 'Uploading...';
+      statusMessage.style.color = 'blue';
 
-      const fileInput = document.getElementById('photo');
-      const instagramId = document.getElementById('instagramId').value;
-      const file = fileInput.files[0];
-      
-      if (file && instagramId) {
-        // Create custom file name with Instagram ID and timestamp
-        const fileName = `[${instagramId}]_${Date.now()}_${file.name}`;
+      try {
+        const response = await fetch('https://api.cloudinary.com/v1_1/pydahkranthi/image/upload', {
+          method: 'POST',
+          body: formData
+        });
 
-        // Show a status message indicating the file is being uploaded
-        document.getElementById('statusMessage').textContent = 'Uploading...';
-
-        // Upload file to Dropbox with the custom file name
-        dbx.filesUpload({ path: '/' + fileName, contents: file })
-          .then(function (response) {
-            // File uploaded successfully
-            document.getElementById('statusMessage').textContent = 'Upload successful!';
-          })
-          .catch(function (error) {
-            // Handle errors during the upload
-            document.getElementById('errorMessage').textContent = 'Error uploading file: ' + error;
-          });
-      } else {
-        document.getElementById('errorMessage').textContent = 'Please select a file and enter your Instagram ID.';
+        if (response.ok) {
+          const data = await response.json();
+          statusMessage.textContent = 'Upload successful!';
+          statusMessage.style.color = 'green';
+          console.log('Uploaded file URL:', data.secure_url);
+        } else {
+          throw new Error('Upload failed.');
+        }
+      } catch (error) {
+        console.error(error);
+        statusMessage.textContent = 'An error occurred while uploading. Please try again.';
+        statusMessage.style.color = 'red';
       }
     });
   </script>
